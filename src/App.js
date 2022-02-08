@@ -1,16 +1,21 @@
 import logo from "./images/logo.svg";
 import "./style.scss";
 import arrowDown from "./images/icon-arrow-light.svg";
+import arrowDownDark from "./images/icon-arrow-dark.svg";
 import desktop from "./images/illustration-editor-desktop.svg";
 import mobile from "./images/illustration-editor-mobile.svg";
 import laptopDesktop from "./images/illustration-laptop-desktop.svg";
 import laptopMobile from "./images/illustration-laptop-mobile.svg";
 import phones from "./images/illustration-phones.svg";
+import ham from "./images/icon-hamburger.svg";
+import hamClose from "./images/icon-close.svg";
 import circle from "./images/bg-pattern-circles.svg";
 import React, { useState } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 function App() {
   const [dropdown, setDropdown] = useState(false);
+  const [FloatingNav, setFloatingNav] = useState(true);
 
   return (
     <div>
@@ -21,7 +26,7 @@ function App() {
               <div>
                 <header>
                   <h1>
-                    <img src={logo} alt="" />
+                    <img className="logo" src={logo} alt="" />
                   </h1>
                 </header>
               </div>
@@ -46,15 +51,18 @@ function App() {
                 <span>
                   <span>Connect</span>
                   <img src={arrowDown} alt="arrow" />
-                  {dropdown ? (
-                    <ul className="drop-list">
-                      <p>Contact</p>
-                      <p>Newsletter</p>
-                      <p>LinkedIn</p>
-                    </ul>
-                  ) : (
-                    ""
-                  )}
+
+                  <>
+                    {dropdown ? (
+                      <ul className="drop-list fadeIn ">
+                        <p>Contact</p>
+                        <p>Newsletter</p>
+                        <p>LinkedIn</p>
+                      </ul>
+                    ) : (
+                      ""
+                    )}
+                  </>
                 </span>
               </div>
             </div>
@@ -62,6 +70,61 @@ function App() {
               <button id="login">Login</button>
               <button id="signup">Sign Up</button>
             </div>
+          </nav>
+          <nav className="mobileNav">
+            <div>
+              <header>
+                <h1>
+                  <img src={logo} alt="" />
+                </h1>
+              </header>
+            </div>
+            {FloatingNav ? (
+              <div className="hamContainer">
+                <img
+                  src={ham}
+                  alt=""
+                  onClick={() => setFloatingNav(!FloatingNav)}
+                />
+              </div>
+            ) : (
+              <div className="hamContainer">
+                <img
+                  src={FloatingNav ? ham : hamClose}
+                  alt=""
+                  onClick={() => setFloatingNav(!FloatingNav)}
+                />
+
+                <div className="floatingNav">
+                  <div>
+                    <span>
+                      Product
+                      <img src={arrowDownDark} alt="" />
+                    </span>
+                  </div>
+                  <div>
+                    <span>
+                      Company
+                      <img src={arrowDownDark} alt="" />
+                    </span>
+                  </div>
+                  <div>
+                    <span>
+                      Connect
+                      <img src={arrowDownDark} alt="" />
+                    </span>
+                  </div>
+                  <div className="drop-list-mobile">
+                    <p>Contact</p>
+                    <p>Newsletter</p>
+                    <p>LinkedIn</p>
+                  </div>
+                  <hr />
+                  <button id="loginMob">Login</button>
+                  <button id="signupMob">Sign Up</button>
+                </div>
+              </div>
+            )}
           </nav>
           <div className="big-text-container">
             <div className="main-heading">A modern publishing platform</div>
@@ -121,7 +184,9 @@ function App() {
         </section>
         <section id="section-4">
           <div className="grid-container">
-            <div className="grid-item"></div>
+            <div className="grid-item">
+              <img src={laptopMobile} alt="" />
+            </div>
             <div className="grid-item">
               <div>Free, open, simple</div>
               <article>
