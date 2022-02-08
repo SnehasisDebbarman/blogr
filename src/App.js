@@ -53,15 +53,16 @@ function App() {
                   <img src={arrowDown} alt="arrow" />
 
                   <>
-                    {dropdown ? (
-                      <ul className="drop-list fadeIn ">
-                        <p>Contact</p>
-                        <p>Newsletter</p>
-                        <p>LinkedIn</p>
-                      </ul>
-                    ) : (
-                      ""
-                    )}
+                    <ul
+                      className="drop-list fadeIn "
+                      style={
+                        dropdown ? { display: "block" } : { display: "none" }
+                      }
+                    >
+                      <p>Contact</p>
+                      <p>Newsletter</p>
+                      <p>LinkedIn</p>
+                    </ul>
                   </>
                 </span>
               </div>
@@ -79,52 +80,66 @@ function App() {
                 </h1>
               </header>
             </div>
-            {FloatingNav ? (
-              <div className="hamContainer">
-                <img
-                  src={ham}
-                  alt=""
-                  onClick={() => setFloatingNav(!FloatingNav)}
-                />
-              </div>
-            ) : (
-              <div className="hamContainer">
-                <img
-                  src={FloatingNav ? ham : hamClose}
-                  alt=""
-                  onClick={() => setFloatingNav(!FloatingNav)}
-                />
 
-                <div className="floatingNav">
-                  <div>
-                    <span>
-                      Product
-                      <img src={arrowDownDark} alt="" />
-                    </span>
-                  </div>
-                  <div>
-                    <span>
-                      Company
-                      <img src={arrowDownDark} alt="" />
-                    </span>
-                  </div>
-                  <div>
-                    <span>
-                      Connect
-                      <img src={arrowDownDark} alt="" />
-                    </span>
-                  </div>
-                  <div className="drop-list-mobile">
-                    <p>Contact</p>
-                    <p>Newsletter</p>
-                    <p>LinkedIn</p>
-                  </div>
-                  <hr />
-                  <button id="loginMob">Login</button>
-                  <button id="signupMob">Sign Up</button>
+            <div className="hamContainer">
+              <img
+                src={FloatingNav ? hamClose : ham}
+                alt=""
+                onClick={() => setFloatingNav(!FloatingNav)}
+              />
+
+              <div
+                className="floatingNav fadeIn "
+                style={FloatingNav ? { display: "flex" } : { display: "none" }}
+              >
+                <div>
+                  <span>
+                    Product
+                    <img src={arrowDownDark} alt="" />
+                  </span>
                 </div>
+                <div>
+                  <span>
+                    Company
+                    <img src={arrowDownDark} alt="" />
+                  </span>
+                </div>
+                <div>
+                  <span
+                    onClick={() => {
+                      setDropdown(!dropdown);
+                    }}
+                  >
+                    Connect
+                    <img
+                      src={arrowDownDark}
+                      style={
+                        dropdown
+                          ? {
+                              transform: "rotate(180deg)",
+                            }
+                          : {}
+                      }
+                      alt="arrow"
+                    />
+                  </span>
+                </div>
+                <div>
+                  {dropdown ? (
+                    <div className="drop-list-mobile ">
+                      <p>Contact</p>
+                      <p>Newsletter</p>
+                      <p>LinkedIn</p>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <hr />
+                <button id="loginMob">Login</button>
+                <button id="signupMob">Sign Up</button>
               </div>
-            )}
+            </div>
           </nav>
           <div className="big-text-container">
             <div className="main-heading">A modern publishing platform</div>
